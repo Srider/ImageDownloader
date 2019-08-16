@@ -172,82 +172,11 @@
                         <outlet property="objMoviesListView" destination="Tez-da-nKW" id="9yE-wz-vdQ"/>
                         <outlet property="objTabListView" destination="Bp9-EV-jbC" id="TPf-aU-aDY"/>
                         <outlet property="view" destination="7AJ-nI-jOZ" id="sYk-DN-7SI"/>
-                        <segue destination="fZp-RP-IMk" kind="show" identifier="MovieDetailViewController" id="P6G-ac-tii"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pjA-Z9-PhH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-5028" y="-1733"/>
-        </scene>
-        <!--Movie Detail View Controller-->
-        <scene sceneID="Zve-Wg-zyC">
-            <objects>
-                <tableViewController id="fZp-RP-IMk" customClass="MovieDetailViewController" customModule="MoviesApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ap3-yA-Fdw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ImageCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageCell" rowHeight="190" id="Z6H-7k-GAb" customClass="ImageCell" customModule="MoviesApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="190"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z6H-7k-GAb" id="wWr-4W-AqS">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="189.66666666666666"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4uG-x4-bng">
-                                            <rect key="frame" x="20" y="11" width="374" height="168"/>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="4uG-x4-bng" firstAttribute="bottom" secondItem="wWr-4W-AqS" secondAttribute="bottomMargin" id="7SA-Np-FKa"/>
-                                        <constraint firstItem="4uG-x4-bng" firstAttribute="leading" secondItem="wWr-4W-AqS" secondAttribute="leadingMargin" id="HNE-qF-WPS"/>
-                                        <constraint firstItem="4uG-x4-bng" firstAttribute="top" secondItem="wWr-4W-AqS" secondAttribute="topMargin" id="apx-bl-5vD"/>
-                                        <constraint firstItem="4uG-x4-bng" firstAttribute="trailing" secondItem="wWr-4W-AqS" secondAttribute="trailingMargin" id="iZF-Ei-ayL"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <accessibility key="accessibilityConfiguration" identifier="ImageCell"/>
-                                <connections>
-                                    <outlet property="imgMovieImage" destination="4uG-x4-bng" id="qxH-kP-mYq"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TextCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextCell" rowHeight="130" id="0EQ-Ap-Lw4" customClass="TextCell" customModule="MoviesApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="218" width="414" height="130"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0EQ-Ap-Lw4" id="I58-yi-Xva">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="129.66666666666666"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TTb-Nl-9Yi">
-                                            <rect key="frame" x="20" y="11" width="374" height="108"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="TTb-Nl-9Yi" firstAttribute="trailing" secondItem="I58-yi-Xva" secondAttribute="trailingMargin" id="E61-wK-FON"/>
-                                        <constraint firstItem="TTb-Nl-9Yi" firstAttribute="leading" secondItem="I58-yi-Xva" secondAttribute="leadingMargin" id="POY-HH-50A"/>
-                                        <constraint firstItem="TTb-Nl-9Yi" firstAttribute="bottom" secondItem="I58-yi-Xva" secondAttribute="bottomMargin" id="aZS-Qv-G3m"/>
-                                        <constraint firstItem="TTb-Nl-9Yi" firstAttribute="top" secondItem="I58-yi-Xva" secondAttribute="topMargin" id="bMP-uk-Sx8"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <accessibility key="accessibilityConfiguration" identifier="TextCell"/>
-                                <connections>
-                                    <outlet property="txtDescription" destination="TTb-Nl-9Yi" id="9ml-gL-IX4"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="fZp-RP-IMk" id="1Bv-tx-xlt"/>
-                            <outlet property="delegate" destination="fZp-RP-IMk" id="3Uy-pV-qMq"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kot-fr-jZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3991" y="-1733"/>
         </scene>
     </scenes>
 </document>

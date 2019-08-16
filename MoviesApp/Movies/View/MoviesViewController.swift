@@ -59,12 +59,6 @@ class MoviesViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MovieDetailViewController" {
-            let objDetailVC:MovieDetailViewController! = (segue.destination as! MovieDetailViewController)
-            objDetailVC.objMovie = self.objSelectedMovie
-        }
-    }
 }
 
 extension MoviesViewController:PresenterToViewProtocol{
@@ -205,8 +199,7 @@ extension MoviesViewController:UICollectionViewDelegate {
             Utilities.sharedInstance.addProgressIndicator(self.view)
             moviePresenter?.fetchMoviesBasedOnSelection(self.nCurrentIndex, andPage: self.nPageNumber)
         } else {
-            self.objSelectedMovie = self.arrMovies[indexPath.item]
-            self.performSegue(withIdentifier: "MovieDetailViewController", sender: self)
+
         }
     }
 }

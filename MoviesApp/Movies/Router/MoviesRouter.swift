@@ -29,24 +29,6 @@ class MoviesRouter:PresenterToRouterProtocol{
         
     }
     
-    static func createMovieDetailModule() -> MovieDetailViewController {
-        
-        let view = mainstoryboard.instantiateViewController(withIdentifier: "MovieDetailViewController") as! MovieDetailViewController
-        
-        let presenter: ViewToPresenterProtocol & InteractorToPresenterProtocol = MoviesPresenter()
-        let interactor: PresenterToInteractorProtocol = MoviesInteractor()
-        let router:PresenterToRouterProtocol = MoviesRouter()
-        
-        view.moviePresenter = presenter
-        presenter.view = view as! PresenterToViewProtocol
-        presenter.router = router
-        presenter.interactor = interactor
-        interactor.presenter = presenter
-        
-        return view
-        
-    }
-    
     static var mainstoryboard: UIStoryboard{
         return UIStoryboard(name:"Main",bundle: Bundle.main)
     }
