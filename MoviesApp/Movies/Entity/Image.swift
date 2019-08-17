@@ -33,7 +33,7 @@ class Image: Mappable {
     var liked_by_user:UInt64!
     var user:User!
     var current_user_collections:Data?
-    var urls:Array<String>!
+    var urls:Urls!
     var categories:String!
     var links:Links!
 

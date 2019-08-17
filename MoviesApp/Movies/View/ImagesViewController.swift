@@ -121,7 +121,6 @@ extension ImagesViewController:UICollectionViewDataSource {
             cell?.contentView.setNeedsDisplay()
         } else {
             let objImageCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cells.kImageInfoCell, for: indexPath as IndexPath) as! ImageInfoCell
-            
             objImageCell.configureCellWithData(arrImages[indexPath.item])
             cell = objImageCell as UICollectionViewCell
             cell?.contentView.setNeedsDisplay()
