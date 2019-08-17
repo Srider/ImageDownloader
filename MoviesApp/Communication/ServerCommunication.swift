@@ -11,7 +11,6 @@ import Alamofire
 
 class ServerCommunication: NSObject  {
     static let sharedInstance = ServerCommunication()
-    let apiKey:String! = Constants.APIKey.k_API_KEY
     var url:String?
     var objSessionManager:SessionManager? = SessionManager.default
 
@@ -19,14 +18,7 @@ class ServerCommunication: NSObject  {
         
     }
     
-    func sendRequest(_ urlPrefix:String!, subs params:Array<String>!, type requestType:String!, withResult result:@escaping(_ response:DataResponse<Any>?)->Swift.Void) {
-        url = urlPrefix
-        for sub in params {
-            url = url! + sub
-            if sub == "api_key=" {
-                url = url! + Constants.APIKey.k_API_KEY
-            }
-        }
+    func sendRequest(_ url:String!, type requestType:String!, withResult result:@escaping(_ response:DataResponse<Any>?)->Swift.Void) {
         print(url!)
         send_request(url!, type:requestType, handler: result)
     }

@@ -10,17 +10,16 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class MoviesViewController: UIViewController {
+class ImagesViewController: UIViewController {
 
-    var moviePresenter:ViewToPresenterProtocol?
+    var imagePresenter:ViewToPresenterProtocol?
     
-    @IBOutlet weak var objMoviesListView: UICollectionView!
+    @IBOutlet weak var objImagesListView: UICollectionView!
     @IBOutlet weak var objTabListView: UICollectionView!
 
     var arrTabItems:Array<String>! = ["Discover", "Now Playing", "Popular", "Top Rated"]
-    var arrMovies:Array<Movie> = Array()
+    var arrImages:Array<Image> = Array()
     
-    var objSelectedMovie:Movie? = nil
     var nPageNumber:Int! = 1
     var nCurrentIndex:Int! = 0
     var nPreviousIndex:Int! = -1
@@ -29,9 +28,7 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         
         setPageTitle()
-        
-        Utilities.sharedInstance.addProgressIndicator(self.view)
-        moviePresenter?.fetchMoviesBasedOnSelection(0, andPage: 1)
+        imagePresenter?.fetchImagesBasedOnSelection(0, andPage: 1)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -47,49 +44,46 @@ class MoviesViewController: UIViewController {
     }
     
     func reloadView()->Void {
-        if self.arrMovies != nil {
-            self.objMoviesListView?.dataSource = self
-            self.objMoviesListView?.delegate = self
-            self.objMoviesListView?.prefetchDataSource = self
+        if self.arrImages != nil {
+            self.objImagesListView?.dataSource = self
+            self.objImagesListView?.delegate = self
+            self.objImagesListView?.prefetchDataSource = self
             
             DispatchQueue.main.async {
                 self.setPageTitle()
-                self.objMoviesListView?.reloadData()
+                self.objImagesListView?.reloadData()
             }
         }
     }
     
 }
 
-extension MoviesViewController:PresenterToViewProtocol{
-    func showMovies(movieArray: Array<Movie>) {
-        Utilities.sharedInstance.removeProgressIndicator()
-        
+extension ImagesViewController:PresenterToViewProtocol{
+    func showImages(imageArray: Array<Image>) {
         if self.nPageNumber == 1 {
-           self.arrMovies = movieArray
+           self.arrImages = imageArray
         } else {
-            self.arrMovies.append(contentsOf: movieArray)
+            self.arrImages.append(contentsOf: imageArray)
         }
         
         self.reloadView()
     }
     
     func showError() {
-        Utilities.sharedInstance.removeProgressIndicator()
-        let alert = UIAlertController(title: "Alert", message: "Problem Fetching Movies", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Alert", message: "Problem Fetching Images", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }
 
-extension MoviesViewController:UICollectionViewDataSource {
+extension ImagesViewController:UICollectionViewDataSource {
     // tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var items:Int! = 0
         if collectionView.tag == 0 {
             items = arrTabItems.count
         } else {
-            items = arrMovies.count
+            items = arrImages.count
         }
         return items
     }
@@ -126,18 +120,10 @@ extension MoviesViewController:UICollectionViewDataSource {
             cell = objTabCell as UICollectionViewCell
             cell?.contentView.setNeedsDisplay()
         } else {
-            let objMovieCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cells.kMovieCell, for: indexPath as IndexPath) as! MovieInfoCell
-            let objMovie = self.arrMovies[indexPath.item]
-            objMovieCell.lblMovieName?.numberOfLines = 2
-            objMovieCell.lblMovieName?.text = objMovie.title
-            objMovieCell.backgroundColor = UIColor.yellow
+            let objImageCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cells.kImageInfoCell, for: indexPath as IndexPath) as! ImageInfoCell
             
-            if objMovie.dImageData != nil {
-                objMovieCell.imgMovieImage?.image = UIImage(data:objMovie.dImageData!)
-            } else {
-                objMovieCell.imgMovieImage?.image = UIImage(named: "no-image")
-            }
-            cell = objMovieCell as UICollectionViewCell
+            objImageCell.configureCellWithData(arrImages[indexPath.item])
+            cell = objImageCell as UICollectionViewCell
             cell?.contentView.setNeedsDisplay()
         }
         return cell!
@@ -145,7 +131,7 @@ extension MoviesViewController:UICollectionViewDataSource {
 }
 
 
-extension MoviesViewController: UICollectionViewDelegateFlowLayout {
+extension ImagesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         var insets:UIEdgeInsets! = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
@@ -178,13 +164,13 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension MoviesViewController:UICollectionViewDataSourcePrefetching {
+extension ImagesViewController:UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         print("Prefetch: \(indexPaths)")
     }
 }
 
-extension MoviesViewController:UICollectionViewDelegate {
+extension ImagesViewController:UICollectionViewDelegate {
     // MARK: - UICollectionViewDelegate protocol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
@@ -197,14 +183,14 @@ extension MoviesViewController:UICollectionViewDelegate {
             self.nCurrentIndex = indexPath.item
             self.objTabListView?.reloadData()
             Utilities.sharedInstance.addProgressIndicator(self.view)
-            moviePresenter?.fetchMoviesBasedOnSelection(self.nCurrentIndex, andPage: self.nPageNumber)
+            imagePresenter?.fetchImagesBasedOnSelection(self.nCurrentIndex, andPage: self.nPageNumber)
         } else {
 
         }
     }
 }
 
-extension MoviesViewController:UIScrollViewDelegate {
+extension ImagesViewController:UIScrollViewDelegate {
     
     //MARK: UIScrollviewDelegate methods
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -213,8 +199,8 @@ extension MoviesViewController:UIScrollViewDelegate {
         } else {
             print("down")
             self.nPageNumber = self.nPageNumber + 1
-            Utilities.sharedInstance.addProgressIndicator(self.view)
-            moviePresenter?.fetchMoviesBasedOnSelection(self.nCurrentIndex, andPage: self.nPageNumber)
+//            Utilities.sharedInstance.addProgressIndicator(self.view)
+            imagePresenter?.fetchImagesBasedOnSelection(self.nCurrentIndex, andPage: self.nPageNumber)
         }
     }
 }

@@ -13,7 +13,7 @@ import ObjectMapper
 @testable import MoviesApp
 
 class MoviesAppTests: XCTestCase, PresenterToViewProtocol {
-    var moviePresenter:ViewToPresenterProtocol?
+    var imagePresenter:ViewToPresenterProtocol?
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -36,23 +36,23 @@ class MoviesAppTests: XCTestCase, PresenterToViewProtocol {
     }
     
     func testFetchDiscoverMovies() {
-        moviePresenter?.fetchMoviesBasedOnSelection(0, andPage: 1)
+        imagePresenter?.fetchImagesBasedOnSelection(0, andPage: 1)
     }
     
     func testFetchNowPlayingMovies() {
-        moviePresenter?.fetchMoviesBasedOnSelection(1, andPage: 1)
+        imagePresenter?.fetchImagesBasedOnSelection(1, andPage: 1)
     }
     
     func testFetchPopularMovies() {
-        moviePresenter?.fetchMoviesBasedOnSelection(2, andPage: 1)
+        imagePresenter?.fetchImagesBasedOnSelection(2, andPage: 1)
     }
     
     func testFetchTopRatedMovies() {
-        moviePresenter?.fetchMoviesBasedOnSelection(3, andPage: 1)
+        imagePresenter?.fetchImagesBasedOnSelection(3, andPage: 1)
     }
     
-    func showMovies(movieArray: Array<Movie>) {
-        XCTAssertTrue(movieArray.count>0)
+    func showImages(imageArray: Array<Image>) {
+        XCTAssertTrue(imageArray.count>0)
     }
     
     func showError() {

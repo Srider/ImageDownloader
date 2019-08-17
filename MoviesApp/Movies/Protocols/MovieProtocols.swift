@@ -13,27 +13,27 @@ protocol ViewToPresenterProtocol: class{
     var view: PresenterToViewProtocol? {get set}
     var interactor: PresenterToInteractorProtocol? {get set}
     var router: PresenterToRouterProtocol? {get set}
-    func fetchMoviesBasedOnSelection(_ selection:Int, andPage pageNumber:Int!)
-    func showMovieController(navigationController:UINavigationController)
+    func fetchImagesBasedOnSelection(_ selection:Int, andPage pageNumber:Int!)
+    func showImageController(navigationController:UINavigationController)
 }
 
 protocol PresenterToViewProtocol: class{
-    func showMovies(movieArray:Array<Movie>)
+    func showImages(imageArray:Array<Image>)
     func showError()
 }
 
 protocol PresenterToRouterProtocol: class {
-    static func createModule()-> MoviesViewController
-    func pushToMovieScreen(navigationConroller:UINavigationController)
+    static func createModule()-> ImagesViewController
+    func pushToImageScreen(navigationConroller:UINavigationController)
 }
 
 protocol PresenterToInteractorProtocol: class {
     var presenter:InteractorToPresenterProtocol? {get set}
-    func fetchMoviesBasedOnSelection(_ selection:Int!, andPage pageNumber:Int!)
+    func fetchImagesBasedOnSelection(_ selection:Int!, andPage pageNumber:Int!)
     
 }
 
 protocol InteractorToPresenterProtocol: class {
-    func movieFetchSuccess(movieArray:Array<Movie>)
-    func movieFetchFailed()
+    func imageFetchSuccess(imageArray:Array<Image>)
+    func imageFetchFailed()
 }

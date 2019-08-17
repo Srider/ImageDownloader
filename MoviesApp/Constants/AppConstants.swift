@@ -156,7 +156,7 @@ struct Constants {
     
     struct Cells {
         static let kTabCell = "TabCell"
-        static let kMovieCell = "MovieInfoCell"
+        static let kImageInfoCell = "ImageInfoCell"
         static let kDetailCell = "Detail"
         static let kImageCell = "ImageCell"
         static let kTextCell = "TextCell"
