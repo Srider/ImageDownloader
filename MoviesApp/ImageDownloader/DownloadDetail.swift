@@ -17,7 +17,7 @@ enum DownloadStatus {
 }
 
 class DownloadDetail: NSObject {
-    var id:UInt64!
+    var id:String!
     var strDownloadURL:String!
     var strDownloadLocation:URL?
     var dImageData:Data?
@@ -25,17 +25,8 @@ class DownloadDetail: NSObject {
     var failureHandler:()->Void={}
     var eDownloadStatus:DownloadStatus!
     var cDelegate:ImageDownloadDelegate!
-
-    init(_ id: UInt64!, withURL strURL:String!, onSuccess successBlock:@escaping (_ demoData:[String:Any]) -> Void, onFailure failureBlock:@escaping () -> ()) {
-        super.init()
-        self.id = id
-        self.strDownloadURL = strURL
-        self.successHandler = successBlock
-        self.failureHandler = failureBlock
-        self.eDownloadStatus = DownloadStatus.none
-    }
     
-    init(_ id: UInt64!, withURL strURL:String!, andDelegate delegate:ImageDownloadDelegate!) {
+    init(_ id: String!, withURL strURL:String!, andDelegate delegate:ImageDownloadDelegate!) {
         super.init()
         self.id = id
         self.strDownloadURL = strURL

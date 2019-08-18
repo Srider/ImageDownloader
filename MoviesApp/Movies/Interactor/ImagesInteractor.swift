@@ -10,11 +10,14 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
-class ImagesInteractor: PresenterToInteractorProtocol{
+class ImagesInteractor: PresenterToInteractorProtocol, ImageDownloadDelegate {
+    
+    
+    var arrImagesList:Array<Image>?
     
     var presenter: InteractorToPresenterProtocol?
     var objServerCommunication:ServerCommunication! = ServerCommunication.sharedInstance
-
+    
     func fetchImagesBasedOnSelection(_ selection: Int!, andPage pageNumber: Int!) {
         
         self.getImages("http://pastebin.com/raw/wgkJgazE")
@@ -28,12 +31,43 @@ class ImagesInteractor: PresenterToInteractorProtocol{
             if let result = response!.result.value {
                 let JSON = result as! Array<Any>
                 let arrImages:Array<Dictionary> = JSON as! Array<Dictionary<AnyHashable, Any>>
-                let arrayObject = Mapper<Image>().mapArray(JSONArray: arrImages as! [[String : Any]]);
+                self.arrImagesList = Mapper<Image>().mapArray(JSONArray: arrImages as! [[String : Any]]);
                 
-                self.presenter?.imageFetchSuccess(imageArray:arrayObject)
+                self.presenter?.imageFetchSuccess(imageArray:self.arrImagesList!)
             }else {
                 self.presenter?.imageFetchFailed()
             }
         })
     }
+    
+    func fetchImagesForItems(_ arrImagesList: Array<Image>) {
+        self.arrImagesList = arrImagesList
+        if self.arrImagesList!.count > 0 {
+            for tempImageItem in self.arrImagesList! {
+                let objImageItem:Image = tempImageItem as Image
+                ImageDownloadManager.sharedDownloadManager.addDownloadRequest(objImageItem.id, fromURL: objImageItem.urls.raw, withDelegate:self)
+            }
+        }
+    }
+    
+    func didFinishImageDownloadWithStatus(_ status:Bool, andData data:[String:Any]) {
+        print("didFinishImageDownloadWithStatus - \(data)")
+        
+        let dItemID = data["id"] as! String
+        let dImageData = data["data"] as? Data
+        
+        for tempImageItem in self.arrImagesList! {
+            let objImageItem:Image = tempImageItem as Image
+            if objImageItem.id == dItemID {
+                if dImageData != nil {
+                    objImageItem.dImageData = data["data"] as? Data
+                } else {
+                    objImageItem.dImageData = nil
+                }
+                objImageItem.bImageFetchCompleted = true
+            }
+        }
+        self.presenter?.refreshImageItems(imageArray:self.arrImagesList!)
+    }
+    
 }

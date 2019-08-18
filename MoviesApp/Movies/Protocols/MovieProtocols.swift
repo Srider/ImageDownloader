@@ -14,12 +14,14 @@ protocol ViewToPresenterProtocol: class{
     var interactor: PresenterToInteractorProtocol? {get set}
     var router: PresenterToRouterProtocol? {get set}
     func fetchImagesBasedOnSelection(_ selection:Int, andPage pageNumber:Int!)
+    func fetchImagesForItems(_ arrImagesList:Array<Image>)
     func showImageController(navigationController:UINavigationController)
 }
 
 protocol PresenterToViewProtocol: class{
     func showImages(imageArray:Array<Image>)
     func showError()
+    func refreshImageData(imageArray:Array<Image>)
 }
 
 protocol PresenterToRouterProtocol: class {
@@ -30,10 +32,11 @@ protocol PresenterToRouterProtocol: class {
 protocol PresenterToInteractorProtocol: class {
     var presenter:InteractorToPresenterProtocol? {get set}
     func fetchImagesBasedOnSelection(_ selection:Int!, andPage pageNumber:Int!)
-    
+    func fetchImagesForItems(_ arrImagesList:Array<Image>)
 }
 
 protocol InteractorToPresenterProtocol: class {
     func imageFetchSuccess(imageArray:Array<Image>)
     func imageFetchFailed()
+    func refreshImageItems(imageArray:Array<Image>)
 }

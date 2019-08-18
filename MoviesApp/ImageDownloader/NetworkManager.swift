@@ -58,30 +58,15 @@ class NetworkManager: NSObject {
             timer.invalidate()
         }
     }
+    
+    public func addRequestToQueue(_ id: String!, fromURL strURL:String!, withDelegate delegate:ImageDownloadDelegate  ) {
+        let objDownloadDetail = DownloadDetail.init(id, withURL: strURL, andDelegate: delegate)
+        
+        /* Add request operation to Queue. */
+        arrRequestList.add(objDownloadDetail)
+        self.sendRequest()
+    }
 
-    
-    public func addRequestToQueue( _ strURL:String!, onSuccess successBlock:@escaping (_ demoData:[String:Any]) -> Void, onFailure failureBlock: @escaping () -> ()) {
-        
-        nRequestCount = nRequestCount+1
-        
-        let objDownloadDetail = DownloadDetail.init(nRequestCount, withURL: strURL, onSuccess: successBlock , onFailure : failureBlock)
-        
-        /* Add request operation to Queue. */
-        arrRequestList.add(objDownloadDetail)
-        self.sendRequest()
-    }
-    
-    public func addRequestToQueue(_ strURL:String!, withDelegate delegate:ImageDownloadDelegate  ) {
-        
-        nRequestCount = nRequestCount+1
-        
-        let objDownloadDetail = DownloadDetail.init(nRequestCount, withURL: strURL, andDelegate: delegate)
-        
-        /* Add request operation to Queue. */
-        arrRequestList.add(objDownloadDetail)
-        self.sendRequest()
-    }
-    
     // MARK: - Periodic Send Request
     fileprivate func sendRequest() {
         for tempDownloadDetail in arrRequestList {
@@ -134,6 +119,7 @@ class NetworkManager: NSObject {
                     
                     dictResults["data"] = downloadDetail.dImageData
                     dictResults["url"] = downloadDetail.strDownloadLocation
+                    dictResults["id"] = downloadDetail.id
                     
                     /* call success handler */
                     if downloadDetail.cDelegate != nil {
@@ -146,9 +132,11 @@ class NetworkManager: NSObject {
                     arrRequestList.remove(tempDownloadDetail)
                 } else if downloadDetail.eDownloadStatus == DownloadStatus.failed {
                     print("Deleting Completed Request - \(String(describing: downloadDetail.id)) with status: \(downloadDetail.eDownloadStatus)")
+                    var dictResults:[String:Any] = [:]
+                    dictResults["id"] = downloadDetail.id
                     if downloadDetail.cDelegate != nil {
                         DispatchQueue.main.async {
-                            downloadDetail.cDelegate?.didFinishImageDownloadWithStatus(false, andData: [:])
+                            downloadDetail.cDelegate?.didFinishImageDownloadWithStatus(false, andData: dictResults)
                         }
                     } else {
                         downloadDetail.failureHandler()

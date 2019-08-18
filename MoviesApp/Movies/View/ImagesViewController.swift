@@ -57,10 +57,14 @@ class ImagesViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension ImagesViewController:PresenterToViewProtocol{
+    func refreshImageData(imageArray: Array<Image>) {
+        self.arrImages = imageArray
+        self.reloadView()
+    }
+    
     func showImages(imageArray: Array<Image>) {
         Utilities.sharedInstance.removeProgressIndicator()
         if self.nPageNumber == 1 {
@@ -70,6 +74,10 @@ extension ImagesViewController:PresenterToViewProtocol{
         }
         
         self.reloadView()
+        
+        if self.arrImages.count > 0 {
+            self.imagePresenter?.fetchImagesForItems(self.arrImages)
+        }
     }
     
     func showError() {
@@ -189,7 +197,7 @@ extension ImagesViewController:UICollectionViewDelegate {
             Utilities.sharedInstance.addProgressIndicator(self.view)
             imagePresenter?.fetchImagesBasedOnSelection(self.nCurrentIndex, andPage: self.nPageNumber)
         } else {
-
+            //Disable Selection
         }
     }
 }

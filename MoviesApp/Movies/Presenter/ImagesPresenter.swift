@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class ImagesPresenter:ViewToPresenterProtocol {
+
+    
     
     var view: PresenterToViewProtocol?
     
@@ -21,6 +23,10 @@ class ImagesPresenter:ViewToPresenterProtocol {
         interactor?.fetchImagesBasedOnSelection(selection, andPage: pageNumber)
     }
     
+    func fetchImagesForItems(_ arrImagesList: Array<Image>) {
+        interactor?.fetchImagesForItems(arrImagesList)
+    }
+    
     func showImageController(navigationController: UINavigationController) {
         router?.pushToImageScreen(navigationConroller:navigationController)
     }
@@ -28,6 +34,7 @@ class ImagesPresenter:ViewToPresenterProtocol {
 }
 
 extension ImagesPresenter: InteractorToPresenterProtocol{
+    
     func imageFetchSuccess(imageArray: Array<Image>) {
         view?.showImages(imageArray: imageArray)
     }
@@ -35,4 +42,8 @@ extension ImagesPresenter: InteractorToPresenterProtocol{
     func imageFetchFailed() {
         view?.showError()
     }
+    func refreshImageItems(imageArray: Array<Image>) {
+        view?.refreshImageData(imageArray:imageArray)
+    }
+
 }

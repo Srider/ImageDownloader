@@ -15,15 +15,7 @@ class ImageDownloadManager {
         NetworkManager.sharedServiceManager.configureManager()
     }
     
-    func addDownloadRequest( _ strURL:String!, onSuccess successBlock:@escaping (_ demoData:[String:Any]) -> Void, onFailure failureBlock: @escaping () -> ()) {
-        
-        NetworkManager.sharedServiceManager.addRequestToQueue(strURL, onSuccess: successBlock, onFailure:failureBlock)
+    func addDownloadRequest( _ id:String!, fromURL strURL:String!,  withDelegate delegate:ImageDownloadDelegate ) -> Void {
+        NetworkManager.sharedServiceManager.addRequestToQueue(id, fromURL:strURL, withDelegate:delegate)
     }
-    
-    func addDownloadRequest( _ strURL:String!, withDelegate delegate:ImageDownloadDelegate ) -> Void {
-        NetworkManager.sharedServiceManager.addRequestToQueue(strURL, withDelegate:delegate)
-
-    }
-
-    
 }
