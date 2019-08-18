@@ -61,10 +61,10 @@ class Utilities: NSObject {
 
     func sortItemsBasedOnUserName(_ arrImageItems:Array<Image>!)->Array<Image> {
         var arrSortedItems:Array<Image>!
-        arrSortedItems = arrImageItems.sorted{ $0.id < $1.id }
+        arrSortedItems = arrImageItems.sorted { $0.user.name!.localizedCaseInsensitiveCompare($1.user.name!) == ComparisonResult.orderedAscending }
+
         return arrSortedItems
     }
-
     
     //MARK: stopNotifier()
     deinit {

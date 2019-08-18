@@ -45,6 +45,7 @@ class ImagesInteractor: PresenterToInteractorProtocol, ImageDownloadDelegate {
         if self.arrImagesList!.count > 0 {
             for tempImageItem in self.arrImagesList! {
                 let objImageItem:Image = tempImageItem as Image
+                print("Adding - \(objImageItem.urls.raw)")
                 ImageDownloadManager.sharedDownloadManager.addDownloadRequest(objImageItem.id, fromURL: objImageItem.urls.raw, withDelegate:self)
             }
         }
