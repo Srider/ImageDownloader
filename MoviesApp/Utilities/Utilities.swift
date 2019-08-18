@@ -59,6 +59,13 @@ class Utilities: NSObject {
         }
     }
 
+    func sortItemsBasedOnUserName(_ arrImageItems:Array<Image>!)->Array<Image> {
+        var arrSortedItems:Array<Image>!
+        arrSortedItems = arrImageItems.sorted{ $0.id < $1.id }
+        return arrSortedItems
+    }
+
+    
     //MARK: stopNotifier()
     deinit {
     }

@@ -59,5 +59,4 @@ class Image: Mappable {
         dImageData = nil
         bImageFetchCompleted = false
     }
-    
 }

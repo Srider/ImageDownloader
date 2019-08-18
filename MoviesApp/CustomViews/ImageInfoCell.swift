@@ -30,14 +30,13 @@ class ImageInfoCell: UICollectionViewCell {
         
         if self.objImageData.dImageData == nil {
             if self.objImageData.bImageFetchCompleted == false {
+                self.imgCellImage?.image = UIImage(named: "no-image")
                 self.addProgressIndicator()
             } else {
+                    self.removeProgressIndicator()
                  self.imgCellImage?.image = UIImage(named: "no-image")
             }
         } else {
-            if bShouldShowLoad == true {
-               self.removeProgressIndicator()
-            }
             self.removeProgressIndicator()
             self.imgCellImage?.image = UIImage(data: self.objImageData.dImageData!)
             self.setNeedsDisplay()

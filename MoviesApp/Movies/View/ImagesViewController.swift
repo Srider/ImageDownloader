@@ -51,6 +51,8 @@ class ImagesViewController: UIViewController {
             self.objImagesListView?.delegate = self
             self.objImagesListView?.prefetchDataSource = self
             
+            self.arrImages = Utilities.sharedInstance.sortItemsBasedOnUserName(self.arrImages)
+            
             DispatchQueue.main.async {
                 self.setPageTitle()
                 self.objImagesListView?.reloadData()

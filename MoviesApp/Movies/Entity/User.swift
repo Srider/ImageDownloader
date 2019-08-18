@@ -34,5 +34,4 @@ class User: Mappable {
         profile_image <- map[PROFILE_IMAGE]
         links <- map[LINKS]
     }
-    
 }
