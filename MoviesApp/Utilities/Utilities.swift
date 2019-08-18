@@ -62,9 +62,23 @@ class Utilities: NSObject {
     func sortItemsBasedOnUserName(_ arrImageItems:Array<Image>!)->Array<Image> {
         var arrSortedItems:Array<Image>!
         arrSortedItems = arrImageItems.sorted { $0.user.name!.localizedCaseInsensitiveCompare($1.user.name!) == ComparisonResult.orderedAscending }
-
         return arrSortedItems
     }
+    
+    
+    func scaleUIImageToSize(_ image: UIImage, toSize size: CGSize) -> UIImage {
+        let hasAlpha = false
+        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+        image.draw(in: CGRect(origin: CGPoint(x: 0,y :0), size: size))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return scaledImage!
+    }
+
     
     //MARK: stopNotifier()
     deinit {

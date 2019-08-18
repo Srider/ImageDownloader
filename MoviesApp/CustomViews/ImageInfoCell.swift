@@ -28,19 +28,27 @@ class ImageInfoCell: UICollectionViewCell {
         self.backgroundColor = UIColor.yellow
         self.objImageData = objImageData
         
-        if self.objImageData.dImageData == nil {
-            if self.objImageData.bImageFetchCompleted == false {
-                self.imgCellImage?.image = UIImage(named: "no-image")
-                self.addProgressIndicator()
-            } else {
-                    self.removeProgressIndicator()
-                 self.imgCellImage?.image = UIImage(named: "no-image")
-            }
-        } else {
+        if self.objImageData.dImageData != nil && self.objImageData.bImageFetchCompleted == true {
             self.removeProgressIndicator()
-            self.imgCellImage?.image = UIImage(data: self.objImageData.dImageData!)
-            self.setNeedsDisplay()
+            let objImage:UIImage? = UIImage(data: self.objImageData.dImageData!)
+            let image: UIImage!
+            if objImage == nil {
+               image = Utilities.sharedInstance.scaleUIImageToSize(UIImage(named: "no-image")!, toSize:(self.imgCellImage?.frame.size)!)
+            } else {
+               image = Utilities.sharedInstance.scaleUIImageToSize(objImage!, toSize:(self.imgCellImage?.frame.size)!)
+            }
+            self.imgCellImage?.image = image
+        } else if self.objImageData.dImageData == nil && self.objImageData.bImageFetchCompleted == true {
+            self.removeProgressIndicator()
+            let image: UIImage! = Utilities.sharedInstance.scaleUIImageToSize(UIImage(named: "no-image")!, toSize:(self.imgCellImage?.frame.size)!)
+            self.imgCellImage?.image = image
+            
+        } else if self.objImageData.dImageData == nil && self.objImageData.bImageFetchCompleted == false {
+            let image: UIImage! = Utilities.sharedInstance.scaleUIImageToSize(UIImage(named: "no-image")!, toSize:(self.imgCellImage?.frame.size)!)
+            self.imgCellImage?.image = image
+            self.addProgressIndicator()
         }
+        self.setNeedsDisplay()
     }
     
     func addProgressIndicator() {
@@ -61,7 +69,6 @@ class ImageInfoCell: UICollectionViewCell {
             self.indicator!.setUpView()
             self.indicator!.startAnimation()
         }
-        
     }
     
     func removeProgressIndicator() {
