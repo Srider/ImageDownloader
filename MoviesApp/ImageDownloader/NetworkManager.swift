@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kDEFAULT_CONCURRENCY:Int = 5
+let kDEFAULT_CONCURRENCY:Int = 3
 
 class NetworkManager: NSObject {
     static let sharedServiceManager = NetworkManager()
@@ -23,7 +23,7 @@ class NetworkManager: NSObject {
         registerNotifications()
         
         /* Make serial. */
-        requestQueue?.maxConcurrentOperationCount = 1
+        requestQueue?.maxConcurrentOperationCount = kDEFAULT_CONCURRENCY
             
         /* Start Timer */
         startTimer()
