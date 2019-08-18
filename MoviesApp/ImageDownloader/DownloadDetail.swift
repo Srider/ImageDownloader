@@ -10,9 +10,10 @@ import UIKit
 
 enum DownloadStatus {
     case none
-    case pending
+    case started
     case downloading
     case downloaded
+    case failed
 }
 
 class DownloadDetail: NSObject {
@@ -23,6 +24,7 @@ class DownloadDetail: NSObject {
     var successHandler:([String:Any])->Void = {([String:Any]) -> Void in}
     var failureHandler:()->Void={}
     var eDownloadStatus:DownloadStatus!
+    var cDelegate:ImageDownloadDelegate!
 
     init(_ id: UInt64!, withURL strURL:String!, onSuccess successBlock:@escaping (_ demoData:[String:Any]) -> Void, onFailure failureBlock:@escaping () -> ()) {
         super.init()
@@ -30,6 +32,14 @@ class DownloadDetail: NSObject {
         self.strDownloadURL = strURL
         self.successHandler = successBlock
         self.failureHandler = failureBlock
+        self.eDownloadStatus = DownloadStatus.none
+    }
+    
+    init(_ id: UInt64!, withURL strURL:String!, andDelegate delegate:ImageDownloadDelegate!) {
+        super.init()
+        self.id = id
+        self.strDownloadURL = strURL
+        self.cDelegate = delegate
         self.eDownloadStatus = DownloadStatus.none
     }
 

@@ -68,26 +68,28 @@ class ImageDownloadService:Operation{
         /* Fire Request using URLSession's dataTask API call */
         self.objDownloadTask = URLSession.shared.downloadTask(with: self.mRequest.url!, completionHandler: { (url, response, error) in
             print("*********************Completion Handler*********************")
+            print("URL - \(String(describing: url?.absoluteString))")
             if error == nil {
                 self.objDownloadDetail.eDownloadStatus = DownloadStatus.downloaded
                 self.objDownloadDetail.strDownloadLocation = url
-                self.dictData.setObject(self.objDownloadDetail, forKey: "download_detail" as NSCopying)
+                self.objDownloadDetail.dImageData = try? Data(contentsOf: self.objDownloadDetail.strDownloadLocation!)
+                self.dictData.setObject(self.objDownloadDetail as DownloadDetail, forKey: "download_detail" as NSCopying)
                 
                 /* Send Success Notification */
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name:Notification.Name(rawValue:Constants.Notifications.kNetworkOperationSuccess), object: self.dictData, userInfo: nil)
                 }
             } else {
+                print("Error - \(String(describing: error))")
+
+                self.objDownloadDetail.eDownloadStatus = DownloadStatus.failed
+                self.dictData.setObject(self.objDownloadDetail as DownloadDetail, forKey: "download_detail" as NSCopying)
+
                 /* Send Failure Notification */
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name:Notification.Name(rawValue:Constants.Notifications.kNetworkOperationFailure), object: self.dictData, userInfo: nil)
                 }
             }
-            print("URL - \(String(describing: url?.absoluteString))")
-            print("URL - \(String(describing: url?.absoluteURL))")
-
-            print("Response - \(String(describing: response))")
-            print("Error - \(String(describing: error))")
         })
         
         /*Resume Task */

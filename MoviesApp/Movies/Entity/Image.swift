@@ -36,6 +36,7 @@ class Image: Mappable {
     var urls:Urls!
     var categories:String!
     var links:Links!
+    var dImageData:Data?
 
     required init?(map:Map) {
         mapping(map: map)
@@ -54,6 +55,7 @@ class Image: Mappable {
         current_user_collections <- map[COLLECTIONS]
         urls <- map[URL_STRINGS]
         categories <- map[CATEGORIES]
+        dImageData = nil
     }
     
 }

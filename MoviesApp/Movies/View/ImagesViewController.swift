@@ -28,6 +28,8 @@ class ImagesViewController: UIViewController {
         super.viewDidLoad()
         
         setPageTitle()
+        Utilities.sharedInstance.addProgressIndicator(self.view)
+
         imagePresenter?.fetchImagesBasedOnSelection(0, andPage: 1)
     }
     
@@ -44,7 +46,7 @@ class ImagesViewController: UIViewController {
     }
     
     func reloadView()->Void {
-        if self.arrImages != nil {
+        if self.arrImages.count > 0 {
             self.objImagesListView?.dataSource = self
             self.objImagesListView?.delegate = self
             self.objImagesListView?.prefetchDataSource = self
@@ -60,6 +62,7 @@ class ImagesViewController: UIViewController {
 
 extension ImagesViewController:PresenterToViewProtocol{
     func showImages(imageArray: Array<Image>) {
+        Utilities.sharedInstance.removeProgressIndicator()
         if self.nPageNumber == 1 {
            self.arrImages = imageArray
         } else {
@@ -70,7 +73,9 @@ extension ImagesViewController:PresenterToViewProtocol{
     }
     
     func showError() {
-        let alert = UIAlertController(title: "Alert", message: "Problem Fetching Images", preferredStyle: UIAlertController.Style.alert)
+        Utilities.sharedInstance.removeProgressIndicator()
+
+        let alert = UIAlertController(title: "Network Failure", message: "Problem Fetching Images", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -198,7 +203,7 @@ extension ImagesViewController:UIScrollViewDelegate {
         } else {
             print("down")
             self.nPageNumber = self.nPageNumber + 1
-//            Utilities.sharedInstance.addProgressIndicator(self.view)
+            Utilities.sharedInstance.addProgressIndicator(self.view)
             imagePresenter?.fetchImagesBasedOnSelection(self.nCurrentIndex, andPage: self.nPageNumber)
         }
     }
