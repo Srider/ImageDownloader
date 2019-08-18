@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/NetworkManager.swift"
-            timestampString = "587836876.065536"
+            timestampString = "587838417.034251"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "didEndRequestWithFailure(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/NetworkManager.swift"
-            timestampString = "587836876.0658621"
+            timestampString = "587838417.034647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "didUpdateResultsWithData(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/NetworkManager.swift"
-            timestampString = "587836876.06594"
+            timestampString = "587838417.034742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "sendRequest()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/NetworkManager.swift"
-            timestampString = "587836876.066009"
+            timestampString = "587838417.034827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "refreshQueue()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/NetworkManager.swift"
-            timestampString = "587836876.066069"
+            timestampString = "587838417.034905"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "refreshQueue()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/NetworkManager.swift"
-            timestampString = "587836876.066149"
+            timestampString = "587838417.034979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "refreshQueue()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/NetworkManager.swift"
-            timestampString = "587836876.066203"
+            timestampString = "587838417.0350519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "refreshQueue()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/ImageDownloadService.swift"
-            timestampString = "587836876.066262"
+            timestampString = "587838417.035133"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/ImageDownloadService.swift"
-            timestampString = "587836876.06647"
+            timestampString = "587838417.035378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "80"
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/NetworkManager.swift"
-            timestampString = "587836876.066529"
+            timestampString = "587838417.035445"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "updateOperationStatus(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,23 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/Movies/Interactor/ImagesInteractor.swift"
-            timestampString = "587836876.0665931"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "didFinishImageDownloadWithStatus(_:andData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoviesApp/Movies/Interactor/ImagesInteractor.swift"
-            timestampString = "587836876.066812"
+            timestampString = "587838417.035521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
@@ -202,11 +186,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/Movies/Interactor/ImagesInteractor.swift"
-            timestampString = "587836876.066869"
+            timestampString = "587838417.036342"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "didFinishImageDownloadWithStatus(_:andData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoviesApp/Movies/Interactor/ImagesInteractor.swift"
+            timestampString = "587838417.036702"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "didFinishImageDownloadWithStatus(_:andData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,12 +218,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/ImageDownloader/ImageDownloadManager.swift"
-            timestampString = "587836876.0669301"
+            timestampString = "587838417.037027"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "addDownloadRequest(_:fromURL:withDelegate:)"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "setMaxConcurrency(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -234,7 +234,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/CustomViews/ImageInfoCell.swift"
-            timestampString = "587836876.067124"
+            timestampString = "587838417.037264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
@@ -246,27 +246,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/CustomViews/ImageInfoCell.swift"
-            timestampString = "587836876.067773"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "configureCellWithData(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoviesApp/CustomViews/ImageInfoCell.swift"
-            timestampString = "587836876.068077"
+            timestampString = "587838417.037488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
@@ -278,11 +262,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoviesApp/CustomViews/ImageInfoCell.swift"
-            timestampString = "587836876.068342"
+            timestampString = "587838417.037553"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"

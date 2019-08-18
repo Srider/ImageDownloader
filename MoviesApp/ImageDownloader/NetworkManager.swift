@@ -8,28 +8,33 @@
 
 import UIKit
 
+let kDEFAULT_CONCURRENCY:Int = 5
+
 class NetworkManager: NSObject {
     static let sharedServiceManager = NetworkManager()
     var arrRequestList:NSMutableArray = NSMutableArray.init()
     var requestQueue:GlobalServiceQueue? = GlobalServiceQueue.sharedQueue
     var timer:Timer!
-    var nRequestCount:UInt64!
-    
+
     //Configure Request Queue and Start Timer
     func configureManager() -> Void {
         
-        nRequestCount = 0
-
         /* Register for notifications */
         registerNotifications()
         
         /* Make serial. */
-        requestQueue?.maxConcurrentOperationCount = 5
-        
+        requestQueue?.maxConcurrentOperationCount = 1
+            
         /* Start Timer */
         startTimer()
         
     }
+    
+    func setMaxConcurrency(_ nMaxConcurrency:Int!) -> Void {
+        /* Make serial. */
+        requestQueue?.maxConcurrentOperationCount = nMaxConcurrency
+    }
+    
     
     //MARK: Register Notifications
     func registerNotifications() {
@@ -148,7 +153,6 @@ class NetworkManager: NSObject {
     }
     
     deinit {
-        nRequestCount = 0
         stopTimer()
         unregisterNotifications()
     }

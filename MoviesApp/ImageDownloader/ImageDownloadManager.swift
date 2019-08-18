@@ -7,12 +7,17 @@
 //
 
 class ImageDownloadManager {
-
+    
+    
     static let sharedDownloadManager = ImageDownloadManager()
     
     
     private init() {
         NetworkManager.sharedServiceManager.configureManager()
+    }
+    
+    func setMaxConcurrency(_ nMaxConcurrency:Int!) {
+        NetworkManager.sharedServiceManager.setMaxConcurrency(nMaxConcurrency)
     }
     
     func addDownloadRequest( _ id:String!, fromURL strURL:String!,  withDelegate delegate:ImageDownloadDelegate ) -> Void {

@@ -12,9 +12,8 @@ import ObjectMapper
 
 class ImagesInteractor: PresenterToInteractorProtocol, ImageDownloadDelegate {
     
-    
     var arrImagesList:Array<Image>?
-    
+    var objImageDownloader:ImageDownloadManager! = ImageDownloadManager.sharedDownloadManager
     var presenter: InteractorToPresenterProtocol?
     var objServerCommunication:ServerCommunication! = ServerCommunication.sharedInstance
     
@@ -24,7 +23,6 @@ class ImagesInteractor: PresenterToInteractorProtocol, ImageDownloadDelegate {
     }
     
     func getImages(_ url:String!)->Swift.Void {
-    
         objServerCommunication.sendRequest(url, type:"GET", withResult:{
             (response:DataResponse<Any>?)->Swift.Void in
             print("*********************DISCOVER*********************")
@@ -46,7 +44,7 @@ class ImagesInteractor: PresenterToInteractorProtocol, ImageDownloadDelegate {
             for tempImageItem in self.arrImagesList! {
                 let objImageItem:Image = tempImageItem as Image
                 print("Adding - \(objImageItem.urls.raw)")
-                ImageDownloadManager.sharedDownloadManager.addDownloadRequest(objImageItem.id, fromURL: objImageItem.urls.raw, withDelegate:self)
+                objImageDownloader.addDownloadRequest(objImageItem.id, fromURL: objImageItem.urls.raw, withDelegate:self)
             }
         }
     }
