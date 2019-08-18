@@ -10,11 +10,26 @@ import UIKit
 
 let kDEFAULT_CONCURRENCY:Int = 3
 
+protocol EventNotificationsDelegate {
+    func registerNotifications()
+    func unregisterNotifications()
+    func didUpdateResultsWithData(_ notification:Notification)->Void
+    func didEndRequestWithFailure(_ notification:Notification)->Void
+}
+
+protocol ServiceQueueDelegate {
+    func setMaxConcurrency(_ nMaxConcurrency:Int!) -> Void
+    func addRequestToQueue(_ id: String!, fromURL strURL:String!, withDelegate delegate:ImageDownloadDelegate)
+    func sendRequest()
+    func updateOperationStatus(_ objDownloadDetail:DownloadDetail!)
+    func refreshQueue()
+}
+
 class NetworkManager: NSObject {
-    static let sharedServiceManager = NetworkManager()
+    var timer:Timer!
     var arrRequestList:NSMutableArray = NSMutableArray.init()
     var requestQueue:GlobalServiceQueue? = GlobalServiceQueue.sharedQueue
-    var timer:Timer!
+    static let sharedServiceManager = NetworkManager()
 
     //Configure Request Queue and Start Timer
     func configureManager() -> Void {
@@ -28,23 +43,6 @@ class NetworkManager: NSObject {
         /* Start Timer */
         startTimer()
         
-    }
-    
-    func setMaxConcurrency(_ nMaxConcurrency:Int!) -> Void {
-        /* Make serial. */
-        requestQueue?.maxConcurrentOperationCount = nMaxConcurrency
-    }
-    
-    
-    //MARK: Register Notifications
-    func registerNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateResultsWithData), name: NSNotification.Name(rawValue: Constants.Notifications.kNetworkOperationSuccess), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didEndRequestWithFailure), name: NSNotification.Name(rawValue: Constants.Notifications.kNetworkOperationFailure), object: nil)
-    }
-    
-    //MARK: Unregister Notificatons
-    func unregisterNotifications() {
-        NotificationCenter.default.removeObserver(self)
     }
     
     //Start Timer
@@ -63,32 +61,29 @@ class NetworkManager: NSObject {
             timer.invalidate()
         }
     }
+   
+    deinit {
+        stopTimer()
+        unregisterNotifications()
+    }
+}
+
+
+extension NetworkManager: EventNotificationsDelegate {
     
-    public func addRequestToQueue(_ id: String!, fromURL strURL:String!, withDelegate delegate:ImageDownloadDelegate  ) {
-        let objDownloadDetail = DownloadDetail.init(id, withURL: strURL, andDelegate: delegate)
-        
-        /* Add request operation to Queue. */
-        arrRequestList.add(objDownloadDetail)
-        self.sendRequest()
+    //MARK: Register Notifications
+    func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateResultsWithData), name: NSNotification.Name(rawValue: Constants.Notifications.kNetworkOperationSuccess), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didEndRequestWithFailure), name: NSNotification.Name(rawValue: Constants.Notifications.kNetworkOperationFailure), object: nil)
     }
-
-    // MARK: - Periodic Send Request
-    fileprivate func sendRequest() {
-        for tempDownloadDetail in arrRequestList {
-            let objDownloadDetail = tempDownloadDetail as! DownloadDetail
-            if objDownloadDetail.eDownloadStatus == DownloadStatus.none {
-                objDownloadDetail.eDownloadStatus = DownloadStatus.started
-                let imgDownloadService = ImageDownloadService.init(objDownloadDetail)
-                print("Adding Request - \(objDownloadDetail.id)")
-                requestQueue?.addOperation {
-                    imgDownloadService.main()
-                }
-            }
-        }
+    
+    //MARK: Unregister Notificatons
+    func unregisterNotifications() {
+        NotificationCenter.default.removeObserver(self)
     }
-
+    
     //MARK: didUpdateSearchResults()
-     @objc func didUpdateResultsWithData(_ notification:Notification)->Void {
+    @objc func didUpdateResultsWithData(_ notification:Notification)->Void {
         let dictResults = notification.object! as! NSMutableDictionary
         let objDownloadDetail = dictResults.object(forKey: "download_detail") as! DownloadDetail
         updateOperationStatus(objDownloadDetail)
@@ -100,11 +95,43 @@ class NetworkManager: NSObject {
         let objDownloadDetail = dictResults.object(forKey: "download_detail") as! DownloadDetail
         updateOperationStatus(objDownloadDetail)
     }
+}
 
+
+extension NetworkManager: ServiceQueueDelegate {
+    
+    func setMaxConcurrency(_ nMaxConcurrency:Int!) -> Void {
+        /* Make serial. */
+        self.requestQueue?.maxConcurrentOperationCount = nMaxConcurrency
+    }
+    
+    public func addRequestToQueue(_ id: String!, fromURL strURL:String!, withDelegate delegate:ImageDownloadDelegate  ) {
+        let objDownloadDetail = DownloadDetail.init(id, withURL: strURL, andDelegate: delegate)
+        
+        /* Add request operation to Queue. */
+        self.arrRequestList.add(objDownloadDetail)
+        self.sendRequest()
+    }
+    
+    // MARK: - Periodic Send Request
+    internal func sendRequest() {
+        for tempDownloadDetail in self.arrRequestList {
+            let objDownloadDetail = tempDownloadDetail as! DownloadDetail
+            if objDownloadDetail.eDownloadStatus == DownloadStatus.none {
+                objDownloadDetail.eDownloadStatus = DownloadStatus.started
+                let imgDownloadService = ImageDownloadService.init(objDownloadDetail)
+                print("Adding Request - \(objDownloadDetail.id)")
+                self.requestQueue?.addOperation {
+                    imgDownloadService.main()
+                }
+            }
+        }
+    }
+    
     //MARK: removeCompletedOperation()
     func updateOperationStatus(_ objDownloadDetail:DownloadDetail!) {
-        for tempDownloadDetail in arrRequestList {
-             let downloadDetail = tempDownloadDetail as! DownloadDetail
+        for tempDownloadDetail in self.arrRequestList {
+            let downloadDetail = tempDownloadDetail as! DownloadDetail
             if downloadDetail.id == objDownloadDetail.id {
                 downloadDetail.eDownloadStatus = objDownloadDetail.eDownloadStatus
                 print("Updating Status - \(String(describing: downloadDetail.eDownloadStatus))")
@@ -113,8 +140,8 @@ class NetworkManager: NSObject {
     }
     
     func refreshQueue() {
-        if (arrRequestList.count > 0) {
-            let eRequestList = arrRequestList.mutableCopy() as! NSMutableArray
+        if (self.arrRequestList.count > 0) {
+            let eRequestList = self.arrRequestList.mutableCopy() as! NSMutableArray
             for tempDownloadDetail in eRequestList {
                 let downloadDetail = tempDownloadDetail as! DownloadDetail
                 if downloadDetail.eDownloadStatus == DownloadStatus.downloaded {
@@ -134,7 +161,7 @@ class NetworkManager: NSObject {
                     } else {
                         downloadDetail.successHandler([:])
                     }
-                    arrRequestList.remove(tempDownloadDetail)
+                    self.arrRequestList.remove(tempDownloadDetail)
                 } else if downloadDetail.eDownloadStatus == DownloadStatus.failed {
                     print("Deleting Completed Request - \(String(describing: downloadDetail.id)) with status: \(downloadDetail.eDownloadStatus)")
                     var dictResults:[String:Any] = [:]
@@ -146,14 +173,9 @@ class NetworkManager: NSObject {
                     } else {
                         downloadDetail.failureHandler()
                     }
-                    arrRequestList.remove(tempDownloadDetail)
+                    self.arrRequestList.remove(tempDownloadDetail)
                 }
             }
         }
-    }
-    
-    deinit {
-        stopTimer()
-        unregisterNotifications()
     }
 }
