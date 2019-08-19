@@ -9,11 +9,12 @@
 import Foundation
 import Alamofire
 import ObjectMapper
+import DownloadManager
 
 class ImagesInteractor: PresenterToInteractorProtocol {
     
     var arrImagesList:Array<Image>?
-    var objImageDownloader:ImageDownloadManager! = ImageDownloadManager.sharedDownloadManager
+    var objImageDownloader:DownloadManager! = DownloadManager.sharedDownloadManager
     var presenter: InteractorToPresenterProtocol?
     var objServerCommunication:ServerCommunication! = ServerCommunication.sharedInstance
     
@@ -53,8 +54,9 @@ class ImagesInteractor: PresenterToInteractorProtocol {
     
 }
 
-extension ImagesInteractor: ImageDownloadDelegate {
-    func didFinishImageDownloadWithStatus(_ status:Bool, andData data:[String:Any]) {
+extension ImagesInteractor: DownloadDelegate {
+ 
+    func didFinishDownloadWithStatus(_ status:Bool, andData data:[String:Any]) {
         print("didFinishImageDownloadWithStatus - \(data)")
         
         let dItemID = data["id"] as! String
