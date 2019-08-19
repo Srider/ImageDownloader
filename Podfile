@@ -12,7 +12,7 @@ target 'MoviesApp' do
   pod 'AlamofireObjectMapper'
 
   source 'https://github.com/Srider/podspec.git'
-  pod 'ImageDownloadManager', '~>1.0'
+  pod 'DownloadManager', '~>2.0'
   
   
   
@@ -22,7 +22,7 @@ target 'MoviesApp' do
     pod 'Alamofire'
     pod 'AlamofireImage'
     pod 'AlamofireObjectMapper'
-    pod 'ImageDownloadManager', '~>1.0'
+    pod 'DownloadManager', '~>2.0'
   end
 
   target 'MoviesAppUITests' do
@@ -31,7 +31,7 @@ target 'MoviesApp' do
     pod 'Alamofire'
     pod 'AlamofireImage'
     pod 'AlamofireObjectMapper'
-    pod 'ImageDownloadManager', '~>1.0'
+    pod 'DownloadManager', '~>2.0'
   end
 
 end
