@@ -7,28 +7,31 @@ target 'MoviesApp' do
 
   # Pods for MoviesApp
   source 'https://github.com/CocoaPods/Specs.git'
-  #pod 'Alamofire', '~> 4.0'
-  #pod 'AlamofireImage', '~> 3.3'
-  #pod 'AlamofireObjectMapper', '~> 4.0'
-
   pod 'Alamofire'
   pod 'AlamofireImage'
   pod 'AlamofireObjectMapper'
 
+  source 'https://github.com/Srider/podspec.git'
+  pod 'ImageDownloadManager', '~>1.0'
+  
+  
+  
   target 'MoviesAppTests' do
     inherit! :search_paths
     # Pods for testing
-	pod 'Alamofire'
+    pod 'Alamofire'
   	pod 'AlamofireImage'
   	pod 'AlamofireObjectMapper'
+    pod 'ImageDownloadManager', '~>1.0'
   end
 
   target 'MoviesAppUITests' do
     inherit! :search_paths
     # Pods for testing
-	pod 'Alamofire'
+    pod 'Alamofire'
   	pod 'AlamofireImage'
   	pod 'AlamofireObjectMapper'
+    pod 'ImageDownloadManager', '~>1.0'
   end
 
 end

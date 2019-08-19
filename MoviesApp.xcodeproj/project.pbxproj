@@ -59,13 +59,6 @@
 		37E653CA2307E60100A197FF /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E653C92307E60100A197FF /* Links.swift */; };
 		37E653CC2307E60F00A197FF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E653CB2307E60F00A197FF /* User.swift */; };
 		37E653CE2307E9A300A197FF /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E653CD2307E9A300A197FF /* ProfileImage.swift */; };
-		37E94B8923086295004C6FE9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E94B8523086295004C6FE9 /* NetworkManager.swift */; };
-		37E94B8A23086295004C6FE9 /* ImageDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E94B8623086295004C6FE9 /* ImageDownloadService.swift */; };
-		37E94B8B23086295004C6FE9 /* GlobalServiceQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E94B8723086295004C6FE9 /* GlobalServiceQueue.swift */; };
-		37E94B8C23086295004C6FE9 /* ImageDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E94B8823086295004C6FE9 /* ImageDownloadManager.swift */; };
-		37E94B8E230862C1004C6FE9 /* DownloadDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E94B8D230862C1004C6FE9 /* DownloadDetail.swift */; };
-		37E94B9023094783004C6FE9 /* ImageDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E94B8F23094783004C6FE9 /* ImageDownloadDelegate.swift */; };
-		37E94B94230A9B4B004C6FE9 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E94B93230A9B4B004C6FE9 /* CacheService.swift */; };
 		44FC7637D02141E306DEF901 /* Pods_MoviesAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C2F5C5A0192A6039BEAF112 /* Pods_MoviesAppUITests.framework */; };
 		CADC74562AA809BCE332D9A8 /* Pods_MoviesAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17011E5740636845FC24F894 /* Pods_MoviesAppTests.framework */; };
 /* End PBXBuildFile section */
@@ -120,13 +113,6 @@
 		37E653C92307E60100A197FF /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		37E653CB2307E60F00A197FF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		37E653CD2307E9A300A197FF /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
-		37E94B8523086295004C6FE9 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		37E94B8623086295004C6FE9 /* ImageDownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadService.swift; sourceTree = "<group>"; };
-		37E94B8723086295004C6FE9 /* GlobalServiceQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalServiceQueue.swift; sourceTree = "<group>"; };
-		37E94B8823086295004C6FE9 /* ImageDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadManager.swift; sourceTree = "<group>"; };
-		37E94B8D230862C1004C6FE9 /* DownloadDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDetail.swift; sourceTree = "<group>"; };
-		37E94B8F23094783004C6FE9 /* ImageDownloadDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadDelegate.swift; sourceTree = "<group>"; };
-		37E94B93230A9B4B004C6FE9 /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		6A21313029D8704491CA7341 /* Pods-MoviesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesApp.debug.xcconfig"; path = "Target Support Files/Pods-MoviesApp/Pods-MoviesApp.debug.xcconfig"; sourceTree = "<group>"; };
 		74E9DAA66532575A761F86BF /* Pods_MoviesApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoviesApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C3B70EA2360B5597A55187 /* Pods-MoviesAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesAppTests.debug.xcconfig"; path = "Target Support Files/Pods-MoviesAppTests/Pods-MoviesAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -203,7 +189,6 @@
 		376F12B322FB20ED00B1F917 /* MoviesApp */ = {
 			isa = PBXGroup;
 			children = (
-				37E94B842308625A004C6FE9 /* ImageDownloader */,
 				376F132722FB33E000B1F917 /* Utilities */,
 				376F132222FB2B1C00B1F917 /* Communication */,
 				376F12F522FB228700B1F917 /* Constants */,
@@ -336,20 +321,6 @@
 				376F132822FB33F900B1F917 /* Utilities.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		37E94B842308625A004C6FE9 /* ImageDownloader */ = {
-			isa = PBXGroup;
-			children = (
-				37E94B8D230862C1004C6FE9 /* DownloadDetail.swift */,
-				37E94B8723086295004C6FE9 /* GlobalServiceQueue.swift */,
-				37E94B8823086295004C6FE9 /* ImageDownloadManager.swift */,
-				37E94B8623086295004C6FE9 /* ImageDownloadService.swift */,
-				37E94B8523086295004C6FE9 /* NetworkManager.swift */,
-				37E94B8F23094783004C6FE9 /* ImageDownloadDelegate.swift */,
-				37E94B93230A9B4B004C6FE9 /* CacheService.swift */,
-			);
-			path = ImageDownloader;
 			sourceTree = "<group>";
 		};
 		3B0FED82731A2679BD33E95A /* Frameworks */ = {
@@ -622,16 +593,11 @@
 				376F12F122FB225400B1F917 /* MovieProtocols.swift in Sources */,
 				376F131722FB264A00B1F917 /* ImagesRouter.swift in Sources */,
 				376F130522FB22D800B1F917 /* ProgressIndicator.swift in Sources */,
-				37E94B8E230862C1004C6FE9 /* DownloadDetail.swift in Sources */,
-				37E94B8923086295004C6FE9 /* NetworkManager.swift in Sources */,
 				376F131F22FB27C300B1F917 /* ImagesViewController.swift in Sources */,
-				37E94B9023094783004C6FE9 /* ImageDownloadDelegate.swift in Sources */,
 				37E653C82307E5E200A197FF /* Categories.swift in Sources */,
-				37E94B8B23086295004C6FE9 /* GlobalServiceQueue.swift in Sources */,
 				37E653CC2307E60F00A197FF /* User.swift in Sources */,
 				37E653C62307E5D200A197FF /* Urls.swift in Sources */,
 				376F132422FB2B4B00B1F917 /* ServerCommunication.swift in Sources */,
-				37E94B8C23086295004C6FE9 /* ImageDownloadManager.swift in Sources */,
 				376F130F22FB23DE00B1F917 /* Image.swift in Sources */,
 				376F130822FB22D800B1F917 /* ImageInfoCell.swift in Sources */,
 				376F12F722FB22BA00B1F917 /* AppConstants.swift in Sources */,
@@ -642,9 +608,7 @@
 				37E653CA2307E60100A197FF /* Links.swift in Sources */,
 				376F12B522FB20ED00B1F917 /* AppDelegate.swift in Sources */,
 				376F131322FB260200B1F917 /* ImagesInteractor.swift in Sources */,
-				37E94B8A23086295004C6FE9 /* ImageDownloadService.swift in Sources */,
 				376F130B22FB22D800B1F917 /* TextCell.swift in Sources */,
-				37E94B94230A9B4B004C6FE9 /* CacheService.swift in Sources */,
 				376F131B22FB268000B1F917 /* ImagesPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
