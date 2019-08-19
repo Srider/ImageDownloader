@@ -20,8 +20,8 @@ target 'MoviesApp' do
     inherit! :search_paths
     # Pods for testing
     pod 'Alamofire'
-  	pod 'AlamofireImage'
-  	pod 'AlamofireObjectMapper'
+    pod 'AlamofireImage'
+    pod 'AlamofireObjectMapper'
     pod 'ImageDownloadManager', '~>1.0'
   end
 
@@ -29,8 +29,8 @@ target 'MoviesApp' do
     inherit! :search_paths
     # Pods for testing
     pod 'Alamofire'
-  	pod 'AlamofireImage'
-  	pod 'AlamofireObjectMapper'
+    pod 'AlamofireImage'
+    pod 'AlamofireObjectMapper'
     pod 'ImageDownloadManager', '~>1.0'
   end
 
