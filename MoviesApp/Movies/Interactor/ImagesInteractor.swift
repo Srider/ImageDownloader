@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
-class ImagesInteractor: PresenterToInteractorProtocol, ImageDownloadDelegate {
+class ImagesInteractor: PresenterToInteractorProtocol {
     
     var arrImagesList:Array<Image>?
     var objImageDownloader:ImageDownloadManager! = ImageDownloadManager.sharedDownloadManager
@@ -49,6 +49,11 @@ class ImagesInteractor: PresenterToInteractorProtocol, ImageDownloadDelegate {
         }
     }
     
+    
+    
+}
+
+extension ImagesInteractor: ImageDownloadDelegate {
     func didFinishImageDownloadWithStatus(_ status:Bool, andData data:[String:Any]) {
         print("didFinishImageDownloadWithStatus - \(data)")
         
@@ -68,5 +73,4 @@ class ImagesInteractor: PresenterToInteractorProtocol, ImageDownloadDelegate {
         }
         self.presenter?.refreshImageItems(imageArray:self.arrImagesList!)
     }
-    
 }

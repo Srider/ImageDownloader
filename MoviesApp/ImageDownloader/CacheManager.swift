@@ -12,17 +12,14 @@ import Foundation
 //This protocol can be implemented for custom image caching.
 public protocol CacheProtocol {
     
-    ///the directory to be used for saving images to disk
-    var diskDirectory: String { get set }
-    
     ///return a data blob from memory. Do NOT do long blocking calls IO calls in this method, only intend for fast hash lookups.
-    func fromMemory(hash: String) -> Data?
+    func fromMemory(url: String) -> Data?
     
     ///add an item to the cache
-    func add(hash: String, data: Data)
+    func add(url: String, data: Data)
     
     ///add an item to the cache
-    func add(hash: String, url: URL)
+    func add(url: URL)
     
     ///remove all the items from memory. This can be used to relieve memory pressue.
     func clearCache()
@@ -34,13 +31,15 @@ public protocol CacheProtocol {
 
 ///our linked list to find the LRU(Least Recently Used) image to evict from the cache when the time comes
 class ImageNode {
-    let hash: String!
+    let url: String!
+    let imgURL:String!
     var prev: ImageNode?
     var next: ImageNode?
     var data: Data!
     
-    init(_ hash: String) {
-        self.hash = hash
+    init(_ imgURL: String, downloadedURL url: String) {
+        self.url = url
+        self.imgURL = imgURL
     }
 }
 
@@ -48,21 +47,26 @@ class ImageNode {
 extension ImageNode: Equatable {}
 
 func ==(lhs: ImageNode, rhs: ImageNode) -> Bool {
-    return lhs.hash == rhs.hash
+    return lhs.url == rhs.url
 }
 
 ///The default implementation of the CacheProtocol
 ///ImageManager uses this by default.
 public class CacheManager: CacheProtocol {
     
-    ///the amount of images to store in memory before pruning
-    public var imageCount = 50
+    static let sharedManager = CacheManager()
     
+    ///the amount of images to store in memory before pruning
+//    public var imageCount = 50
+    
+    public var imageCount = 5
+
     ///the length of time a image is saved to disk before it expires (int seconds).
-    public var diskAge = 60 * 60 * 24 //24 hours
+//    public var diskAge = 60 * 60 * 24 //24 hours
+    public var diskAge = 60 //24 hours
     
     ///the directory to be used for saving images to disk
-    public var diskDirectory: String
+    public var diskDirectory: String?
     
     ///images keeps a mapping from url hashes to imageNodes, this way nodes can be found in constant time
     private var nodeMap = Dictionary<String,ImageNode>()
@@ -78,7 +82,22 @@ public class CacheManager: CacheProtocol {
      
      :param: cacheDirectory is the directory on disk to save cached images to.
      */
-    init(_ cacheDirectory: String) {
+    private init() {}
+    
+    func setCacheFolderName(_ cacheDirectory:String) {
+        var dir = cacheDirectory
+        if dir == "" {
+            #if os(iOS)
+            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            dir = "\(paths[0])" //use default documents folder, not ideal but better than the cache not working
+            #elseif os(OSX)
+            let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
+            if let name = NSBundle.mainBundle().bundleIdentifier {
+                dir = "\(paths[0])/\(name)"
+            }
+            #endif
+        }
+        
         self.diskDirectory = cacheDirectory
     }
     
@@ -89,8 +108,8 @@ public class CacheManager: CacheProtocol {
      
      :returns: A NSData blob of the image
      */
-    public func fromMemory(hash: String) -> Data? {
-        let node = nodeMap[hash]
+    public func fromMemory(url: String) -> Data? {
+        let node = nodeMap[url]
         if let n = node {
             addToFront(node: n)
             return n.data
@@ -107,15 +126,15 @@ public class CacheManager: CacheProtocol {
      :param: url is the location to the image in the temp directory.
      
      */
-    public func add(hash: String, url: URL) {
-        let cachePath = "\(self.diskDirectory)/\(hash)"
+    public func add(url: URL) {
+        let cachePath = "\(self.diskDirectory)/\(url)"
         let moveUrl = NSURL(fileURLWithPath: cachePath)
         let fileManager = FileManager.default
         try? fileManager.removeItem(at: moveUrl as URL)
         try?fileManager.moveItem(at: url, to: moveUrl as URL)
         let data = fileManager.contents(atPath: cachePath)
         if let d = data {
-            add(hash: hash, data: d)
+            add(url: url.absoluteString, data: d)
         }
     }
     
@@ -126,14 +145,14 @@ public class CacheManager: CacheProtocol {
      :param: data is the image data to add.
      
      */
-    public func add(hash: String, data: Data) {
-        var node: ImageNode! = nodeMap[hash]
+    public func add(_ imgURL: String, url: String, data: Data) {
+        var node: ImageNode! = nodeMap[url]
         if node == nil {
-            node = ImageNode(hash)
+            node = ImageNode(url)
         }
         node.data = data
-        nodeMap.removeValue(forKey: hash)
-        nodeMap[hash] = node
+        nodeMap.removeValue(forKey: url)
+        nodeMap[url] = node
         addToFront(node: node)
         if nodeMap.count > self.imageCount {
             prune()
@@ -156,7 +175,7 @@ public class CacheManager: CacheProtocol {
             let prev = t.prev
             t.prev = nil
             prev?.next = nil
-            self.nodeMap.removeValue(forKey: t.hash)
+            self.nodeMap.removeValue(forKey: t.url)
             tail = prev
         }
     }
@@ -164,8 +183,8 @@ public class CacheManager: CacheProtocol {
     ///create the diskDirectory folder if it does not exist
     private func createDiskDirectory() {
         let fileManager = FileManager.default
-        if !fileManager.fileExists(atPath: self.diskDirectory) {
-            try? fileManager.createDirectory(atPath: self.diskDirectory, withIntermediateDirectories: false, attributes: nil)
+        if !fileManager.fileExists(atPath: self.diskDirectory!) {
+            try? fileManager.createDirectory(atPath: self.diskDirectory!, withIntermediateDirectories: false, attributes: nil)
         }
     }
     

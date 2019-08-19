@@ -16,7 +16,7 @@ enum DownloadStatus {
     case failed
 }
 
-class DownloadDetail: NSObject {
+public class DownloadDetail: NSObject {
     var id:String!
     var strDownloadURL:String!
     var strDownloadLocation:URL?

@@ -10,6 +10,13 @@ import UIKit
 
 let kDEFAULT_CONCURRENCY:Int = 3
 
+protocol CacheServiceDelegate {
+    func setCacheFolderName(_ strFolderName:String!)
+    func getImageFromCache(_ url:String!)->DownloadDetail?
+    func addImageDataToCache(_ downloadDetail:DownloadDetail)
+}
+
+
 protocol EventNotificationsDelegate {
     func registerNotifications()
     func unregisterNotifications()
@@ -29,6 +36,8 @@ class NetworkManager: NSObject {
     var timer:Timer!
     var arrRequestList:NSMutableArray = NSMutableArray.init()
     var requestQueue:GlobalServiceQueue? = GlobalServiceQueue.sharedQueue
+    var objCacheManager:CacheService! = CacheService.sharedManager
+
     static let sharedServiceManager = NetworkManager()
 
     //Configure Request Queue and Start Timer
@@ -98,6 +107,8 @@ extension NetworkManager: EventNotificationsDelegate {
 }
 
 
+
+
 extension NetworkManager: ServiceQueueDelegate {
     
     func setMaxConcurrency(_ nMaxConcurrency:Int!) -> Void {
@@ -117,12 +128,25 @@ extension NetworkManager: ServiceQueueDelegate {
     internal func sendRequest() {
         for tempDownloadDetail in self.arrRequestList {
             let objDownloadDetail = tempDownloadDetail as! DownloadDetail
-            if objDownloadDetail.eDownloadStatus == DownloadStatus.none {
-                objDownloadDetail.eDownloadStatus = DownloadStatus.started
-                let imgDownloadService = ImageDownloadService.init(objDownloadDetail)
-                print("Adding Request - \(objDownloadDetail.id)")
-                self.requestQueue?.addOperation {
-                    imgDownloadService.main()
+            let imgDownloadDetail = self.getImageFromCache(objDownloadDetail.strDownloadURL)
+            if imgDownloadDetail != nil {
+                var dictResults:[String:Any] = [:]
+                dictResults["data"] = imgDownloadDetail!.dImageData
+                dictResults["url"] = imgDownloadDetail!.strDownloadLocation
+                dictResults["id"] = imgDownloadDetail!.id
+                
+                DispatchQueue.main.async {
+                    objDownloadDetail.cDelegate?.didFinishImageDownloadWithStatus(true, andData:dictResults)
+                }
+                self.arrRequestList.remove(tempDownloadDetail)
+            } else {
+                if objDownloadDetail.eDownloadStatus == DownloadStatus.none {
+                    objDownloadDetail.eDownloadStatus = DownloadStatus.started
+                    let imgDownloadService = ImageDownloadService.init(objDownloadDetail)
+                    print("Adding Request - \(objDownloadDetail.id)")
+                    self.requestQueue?.addOperation {
+                        imgDownloadService.main()
+                    }
                 }
             }
         }
@@ -153,29 +177,43 @@ extension NetworkManager: ServiceQueueDelegate {
                     dictResults["url"] = downloadDetail.strDownloadLocation
                     dictResults["id"] = downloadDetail.id
                     
-                    /* call success handler */
-                    if downloadDetail.cDelegate != nil {
-                        DispatchQueue.main.async {
-                            downloadDetail.cDelegate?.didFinishImageDownloadWithStatus(true, andData:dictResults)
-                        }
-                    } else {
-                        downloadDetail.successHandler([:])
+                    self.addImageDataToCache(downloadDetail)
+                    
+                    DispatchQueue.main.async {
+                        downloadDetail.cDelegate?.didFinishImageDownloadWithStatus(true, andData:dictResults)
                     }
                     self.arrRequestList.remove(tempDownloadDetail)
                 } else if downloadDetail.eDownloadStatus == DownloadStatus.failed {
                     print("Deleting Completed Request - \(String(describing: downloadDetail.id)) with status: \(downloadDetail.eDownloadStatus)")
                     var dictResults:[String:Any] = [:]
                     dictResults["id"] = downloadDetail.id
-                    if downloadDetail.cDelegate != nil {
-                        DispatchQueue.main.async {
-                            downloadDetail.cDelegate?.didFinishImageDownloadWithStatus(false, andData: dictResults)
-                        }
-                    } else {
-                        downloadDetail.failureHandler()
+                    DispatchQueue.main.async {
+                        downloadDetail.cDelegate?.didFinishImageDownloadWithStatus(false, andData: dictResults)
                     }
+                
                     self.arrRequestList.remove(tempDownloadDetail)
                 }
             }
         }
     }
 }
+
+
+extension NetworkManager: CacheServiceDelegate {
+    
+    func setCacheFolderName(_ strFolderName:String!) {
+        self.objCacheManager?.setCacheFolderName(strFolderName)
+    }
+    
+    func getImageFromCache(_ url:String!)->DownloadDetail? {
+        let data = self.objCacheManager!.fromMemory(url)
+        return data
+    }
+    
+    func addImageDataToCache(_ downloadDetail:DownloadDetail) {
+        if downloadDetail.dImageData != nil && downloadDetail.eDownloadStatus == DownloadStatus.downloaded {
+            self.objCacheManager!.add(downloadDetail)
+        }
+    }
+}
+

@@ -13,6 +13,11 @@ import ObjectMapper
 @testable import MoviesApp
 
 class MoviesAppTests: XCTestCase, PresenterToViewProtocol {
+    func refreshImageData(imageArray: Array<Image>) {
+        <#code#>
+    }
+    
+
     var imagePresenter:ViewToPresenterProtocol?
 
     override func setUp() {

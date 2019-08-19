@@ -23,4 +23,8 @@ class ImageDownloadManager {
     func addDownloadRequest( _ id:String!, fromURL strURL:String!,  withDelegate delegate:ImageDownloadDelegate ) -> Void {
         NetworkManager.sharedServiceManager.addRequestToQueue(id, fromURL:strURL, withDelegate:delegate)
     }
+    
+//    func setCacheDirectory(_ diskDirectory:String!) {
+//        NetworkManager.sharedServiceManager.setCacheFolderName(diskDirectory)
+//    }
 }

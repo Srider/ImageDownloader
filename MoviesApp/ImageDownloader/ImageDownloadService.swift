@@ -8,7 +8,10 @@
 
 import UIKit
 
-class ImageDownloadService:Operation{
+
+
+
+class ImageDownloadService:Operation {
     
     @objc var dictData:NSMutableDictionary!
     var mServiceURL: String!
@@ -34,23 +37,6 @@ class ImageDownloadService:Operation{
         return tempRequest
     }
     
-    //MARK: Response Caching
-    @objc(URLSession:dataTask:willCacheResponse:completionHandler:) func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Void) {
-        
-        var newCachedResponse:CachedURLResponse? = proposedResponse
-        let newUserInfo:NSDictionary! = NSDictionary.init(object: Date.init(), forKey: Constants.Caching.kURLCachedDate as NSCopying)
-        
-        if (proposedResponse.response.url?.scheme == Constants.Caching.kCachedURLType) {
-            
-            /* Cahcing if Request is ONLY of type "https:" */
-            newCachedResponse = CachedURLResponse.init(response: proposedResponse.response, data: proposedResponse.data, userInfo: newUserInfo as? [AnyHashable : Any], storagePolicy: URLCache.StoragePolicy.allowedInMemoryOnly)
-            
-        } else {
-            newCachedResponse = CachedURLResponse.init(response: proposedResponse.response, data: proposedResponse.data, userInfo: newUserInfo as? [AnyHashable : Any], storagePolicy: proposedResponse.storagePolicy)
-        }
-        completionHandler(newCachedResponse);
-    }
-    
     //MARK: main()
     override func main() {
         
@@ -64,7 +50,7 @@ class ImageDownloadService:Operation{
         
         /* Get request from URL String */
         self.mRequest.url = URL(string: self.mServiceURL)
-
+        
         /* Fire Request using URLSession's dataTask API call */
         self.objDownloadTask = URLSession.shared.downloadTask(with: self.mRequest.url!, completionHandler: { (url, response, error) in
             print("*********************Completion Handler*********************")
@@ -73,7 +59,9 @@ class ImageDownloadService:Operation{
                 self.objDownloadDetail.eDownloadStatus = DownloadStatus.downloaded
                 self.objDownloadDetail.strDownloadLocation = url
                 self.objDownloadDetail.dImageData = try? Data(contentsOf: self.objDownloadDetail.strDownloadLocation!)
+            
                 self.dictData.setObject(self.objDownloadDetail as DownloadDetail, forKey: "download_detail" as NSCopying)
+                
                 
                 /* Send Success Notification */
                 DispatchQueue.main.async {
@@ -81,10 +69,10 @@ class ImageDownloadService:Operation{
                 }
             } else {
                 print("Error - \(String(describing: error))")
-
+                
                 self.objDownloadDetail.eDownloadStatus = DownloadStatus.failed
                 self.dictData.setObject(self.objDownloadDetail as DownloadDetail, forKey: "download_detail" as NSCopying)
-
+                
                 /* Send Failure Notification */
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name:Notification.Name(rawValue:Constants.Notifications.kNetworkOperationFailure), object: self.dictData, userInfo: nil)
@@ -94,5 +82,8 @@ class ImageDownloadService:Operation{
         
         /*Resume Task */
         self.objDownloadTask?.resume()
+        
     }
 }
+
+
