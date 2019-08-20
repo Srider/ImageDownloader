@@ -72,8 +72,7 @@ class ImagesViewController: UIViewController {
     }
     
     @objc func showRefreshControl() {
-        fetchImages()
-        self.reloadView()
+        imagePresenter?.fetchImagesForItems(self.arrImages)
         self.refreshControl?.endRefreshing()
     }
 }
@@ -220,21 +219,6 @@ extension ImagesViewController:UICollectionViewDelegate {
         }
     }
 }
-
-//extension ImagesViewController:UIScrollViewDelegate {
-//
-//    //MARK: UIScrollviewDelegate methods
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0 {
-//            print("up")
-//        } else {
-//            print("down")
-//            self.nPageNumber = self.nPageNumber + 1
-//            Utilities.sharedInstance.addProgressIndicator(self.view)
-//            imagePresenter?.fetchImagesBasedOnSelection(self.nCurrentIndex, andPage: self.nPageNumber)
-//        }
-//    }
-//}
 
 
 
