@@ -10,10 +10,11 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
+
 class ImagesViewController: UIViewController {
 
     var imagePresenter:ViewToPresenterProtocol?
-    
+
     @IBOutlet weak var objImagesListView: UICollectionView!
     @IBOutlet weak var objTabListView: UICollectionView!
 
@@ -23,14 +24,20 @@ class ImagesViewController: UIViewController {
     var nPageNumber:Int! = 1
     var nCurrentIndex:Int! = 0
     var nPreviousIndex:Int! = -1
+    var refreshControl:UIRefreshControl! = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setPageTitle()
-        Utilities.sharedInstance.addProgressIndicator(self.view)
 
-        imagePresenter?.fetchImagesBasedOnSelection(0, andPage: 1)
+        // Add the refresh control to your UIScrollView object.
+        
+        self.refreshControl.addTarget(self, action:  #selector(showRefreshControl), for: .valueChanged)
+        
+        self.objImagesListView.addSubview(self.refreshControl)
+        setPageTitle()
+       
+        Utilities.sharedInstance.addProgressIndicator(self.view)
+        fetchImages()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -58,6 +65,16 @@ class ImagesViewController: UIViewController {
                 self.objImagesListView?.reloadData()
             }
         }
+    }
+    
+    func fetchImages() {
+        imagePresenter?.fetchImagesBasedOnSelection(0, andPage: 1)
+    }
+    
+    @objc func showRefreshControl() {
+        fetchImages()
+        self.reloadView()
+        self.refreshControl?.endRefreshing()
     }
 }
 
@@ -204,17 +221,22 @@ extension ImagesViewController:UICollectionViewDelegate {
     }
 }
 
-extension ImagesViewController:UIScrollViewDelegate {
-    
-    //MARK: UIScrollviewDelegate methods
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0 {
-            print("up")
-        } else {
-            print("down")
-            self.nPageNumber = self.nPageNumber + 1
-            Utilities.sharedInstance.addProgressIndicator(self.view)
-            imagePresenter?.fetchImagesBasedOnSelection(self.nCurrentIndex, andPage: self.nPageNumber)
-        }
-    }
-}
+//extension ImagesViewController:UIScrollViewDelegate {
+//
+//    //MARK: UIScrollviewDelegate methods
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0 {
+//            print("up")
+//        } else {
+//            print("down")
+//            self.nPageNumber = self.nPageNumber + 1
+//            Utilities.sharedInstance.addProgressIndicator(self.view)
+//            imagePresenter?.fetchImagesBasedOnSelection(self.nCurrentIndex, andPage: self.nPageNumber)
+//        }
+//    }
+//}
+
+
+
+
+
