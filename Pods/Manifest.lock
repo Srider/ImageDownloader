@@ -5,14 +5,14 @@ PODS:
   - AlamofireObjectMapper (5.2.0):
     - Alamofire (~> 4.7)
     - ObjectMapper (~> 3.4)
-  - DownloadManager (1.0)
+  - DownloadManager (4.0)
   - ObjectMapper (3.5.1)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - AlamofireObjectMapper
-  - DownloadManager (~> 2.0)
+  - DownloadManager (~> 5.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -27,9 +27,9 @@ SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
   AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
-  DownloadManager: 4b5c65d9fbff7d35fc1e2c813bc7dfd64cbab855
+  DownloadManager: ca5200791af7ebeb10b9daeb1e58c58469083e84
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
 
-PODFILE CHECKSUM: 146f2f514fae517064e3b063784268894c44e44f
+PODFILE CHECKSUM: 2003bd160606559e3b055cc5ea5efc3ff6407ed3
 
 COCOAPODS: 1.7.4

@@ -242,6 +242,7 @@
 /* Begin PBXFileReference section */
 		001B93670565A62F0BDCA652BCF86EBC /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
 		005D5923869078A884E37C4166646E99 /* Pods-MoviesAppUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MoviesAppUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		01EB32A84AC69DE0F235FE89069AA9E2 /* DownloadManager-Swift.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DownloadManager-Swift.h"; path = "Downloader/4.0/DownloadManager.framework/Headers/DownloadManager-Swift.h"; sourceTree = "<group>"; };
 		02A733EB79D94085E6C143CCC0089DF1 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
 		05031199842E5A40F227E3D06F78D044 /* AlamofireImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AlamofireImage-prefix.pch"; sourceTree = "<group>"; };
 		0A5B79D41599D6EF49AB810D1B9C1794 /* Pods-MoviesAppTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MoviesAppTests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -262,7 +263,6 @@
 		2539B9585334040FEF200E9E9F6CDCBF /* EnumTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EnumTransform.swift; path = Sources/EnumTransform.swift; sourceTree = "<group>"; };
 		29859DEADD9D01CC99E59664071B5B7D /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
 		2A705BAA662E372752FEDE7CFBBCE0D7 /* FromJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FromJSON.swift; path = Sources/FromJSON.swift; sourceTree = "<group>"; };
-		2CCB394AF01A7641698331F7F5C0F046 /* DownloadManager-Swift.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DownloadManager-Swift.h"; path = "Downloader/DownloadManager.framework/Headers/DownloadManager-Swift.h"; sourceTree = "<group>"; };
 		2EBCA62EE2E2C70FF591514F7C1723CC /* AlamofireImage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = AlamofireImage.modulemap; sourceTree = "<group>"; };
 		2F8CA2D4511CF85D0E3577F6A6C0C5E0 /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
 		3370C0072866FD2540BB1EAED33CD1DE /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
@@ -274,6 +274,7 @@
 		3A52EEF1C943F11FE376ED54ABC09351 /* Pods_MoviesAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MoviesAppUITests.framework; path = "Pods-MoviesAppUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A79D2121D0A1CD02D409CA3535F07FA /* DateFormatterTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DateFormatterTransform.swift; path = Sources/DateFormatterTransform.swift; sourceTree = "<group>"; };
 		3D1D227DF815685657F65BDB519C6146 /* AlamofireObjectMapper-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AlamofireObjectMapper-umbrella.h"; sourceTree = "<group>"; };
+		3D51693F6764153FBBB9B9CE9B20744B /* DownloadManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DownloadManager.h; path = Downloader/4.0/DownloadManager.framework/Headers/DownloadManager.h; sourceTree = "<group>"; };
 		40223BA4AA99D0911F1BADAACD8AC708 /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
 		424C5CE671A83B295C0FE3AFA93312D9 /* CustomDateFormatTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CustomDateFormatTransform.swift; path = Sources/CustomDateFormatTransform.swift; sourceTree = "<group>"; };
 		43E31776DDCC0CAA498F1C22A42693BD /* Pods-MoviesAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MoviesAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -282,7 +283,6 @@
 		46FEA267DDCB0406CED3005B9C1435DA /* Mapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mapper.swift; path = Sources/Mapper.swift; sourceTree = "<group>"; };
 		4AE8288926C5818A505FE629CEEF513B /* Pods-MoviesApp-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MoviesApp-Info.plist"; sourceTree = "<group>"; };
 		4E7931C1C09D76CEE46E3DFAAD0B1652 /* Pods-MoviesAppUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MoviesAppUITests-umbrella.h"; sourceTree = "<group>"; };
-		5018EABFD3423A7E5025C73D7CDEF216 /* DownloadManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DownloadManager.h; path = Downloader/DownloadManager.framework/Headers/DownloadManager.h; sourceTree = "<group>"; };
 		511315AF47D8D1EF083D704CAE314835 /* TransformOperators.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformOperators.swift; path = Sources/TransformOperators.swift; sourceTree = "<group>"; };
 		555B18AF1ABCF31C96F46D709BFAAE9D /* AlamofireImage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "AlamofireImage-Info.plist"; sourceTree = "<group>"; };
 		55BAEB62967D2E38AF8D2E2972CBE7EC /* Map.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Map.swift; path = Sources/Map.swift; sourceTree = "<group>"; };
@@ -291,6 +291,8 @@
 		5C71665C9C94E6813739D88A48ACEDF4 /* Pods-MoviesApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-MoviesApp.modulemap"; sourceTree = "<group>"; };
 		5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6157B4F6D094826780D0F88A02F9F509 /* ImmutableMappable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImmutableMappable.swift; path = Sources/ImmutableMappable.swift; sourceTree = "<group>"; };
+		61F32D509BA1DDDEE5403DEE044EA033 /* DownloadManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DownloadManager.framework; path = Downloader/4.0/DownloadManager.framework; sourceTree = "<group>"; };
+		661E4CCA614DDE3898674967B72CB8FF /* DownloadManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DownloadManager.xcconfig; sourceTree = "<group>"; };
 		662A947F215C02DBCBE1B1B2609D463B /* Pods-MoviesAppUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MoviesAppUITests-frameworks.sh"; sourceTree = "<group>"; };
 		6803666BE37C79AC57ED7CB7FF97C21D /* Pods-MoviesAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MoviesAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6ABB03BC0B9E024FB228FBA6F707E329 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
@@ -310,7 +312,6 @@
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DDA46B9DFCD642D991C795CCA6BA48D /* Request+AlamofireImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Request+AlamofireImage.swift"; path = "Source/Request+AlamofireImage.swift"; sourceTree = "<group>"; };
 		A1C6B7724D0087388FBAFDB3A55B954F /* Pods-MoviesApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MoviesApp-acknowledgements.plist"; sourceTree = "<group>"; };
-		A1CF91ADC9BFB2E22D019087A6747D3E /* DownloadManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DownloadManager.framework; path = Downloader/DownloadManager.framework; sourceTree = "<group>"; };
 		A324F2F32A175FCDDCF47A082AC9B278 /* Pods-MoviesAppTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MoviesAppTests-frameworks.sh"; sourceTree = "<group>"; };
 		A48B307EB547F887456EBBB18A47AE5A /* Pods-MoviesAppTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MoviesAppTests-Info.plist"; sourceTree = "<group>"; };
 		A8282BA325C498DC434FAD248B988F35 /* TransformType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformType.swift; path = Sources/TransformType.swift; sourceTree = "<group>"; };
@@ -318,7 +319,6 @@
 		AB072775DD3EC9AE7870C9C1AEB021CB /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
 		B02339B780667B4CF730F4974D5C696C /* Image.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Source/Image.swift; sourceTree = "<group>"; };
 		B05A2D7B9520EE881EB1A289F7797DC8 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
-		B20485C7A4764C6B3ABF2C923F8933D1 /* DownloadManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DownloadManager.xcconfig; sourceTree = "<group>"; };
 		B2DA726ECA6D049E83F9E006A672F774 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
 		B465CAE656F162893C64105084162D72 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		B4EA34CC79C8B80787C2826B19C792C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -432,10 +432,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0C67AF1813DABEC061FA9567D6C335BB /* Support Files */ = {
+		05B9BBC670574FD9941B6919B1497237 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				B20485C7A4764C6B3ABF2C923F8933D1 /* DownloadManager.xcconfig */,
+				661E4CCA614DDE3898674967B72CB8FF /* DownloadManager.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/DownloadManager";
@@ -447,7 +447,7 @@
 				D1D232C098FFA4AA4CF2C1EAE78B0E35 /* Alamofire */,
 				6FB950701C534A98397068490D8A2B84 /* AlamofireImage */,
 				533AA0028698CB2C9B38527899A5277C /* AlamofireObjectMapper */,
-				60F4875D1A77EF5C43952F8BEA8670BC /* DownloadManager */,
+				FA9708E9DC4458BD317DD2B7824E990A /* DownloadManager */,
 				6E78FEC5547166222BEE5025B5A3108B /* ObjectMapper */,
 			);
 			name = Pods;
@@ -475,26 +475,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/AlamofireObjectMapper";
-			sourceTree = "<group>";
-		};
-		5ED8FDADAE5A3888BE0562617823421C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A1CF91ADC9BFB2E22D019087A6747D3E /* DownloadManager.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		60F4875D1A77EF5C43952F8BEA8670BC /* DownloadManager */ = {
-			isa = PBXGroup;
-			children = (
-				5018EABFD3423A7E5025C73D7CDEF216 /* DownloadManager.h */,
-				2CCB394AF01A7641698331F7F5C0F046 /* DownloadManager-Swift.h */,
-				5ED8FDADAE5A3888BE0562617823421C /* Frameworks */,
-				0C67AF1813DABEC061FA9567D6C335BB /* Support Files */,
-			);
-			name = DownloadManager;
-			path = DownloadManager;
 			sourceTree = "<group>";
 		};
 		6147A74EBB8253DA92F2F8E90D65A6F9 /* Pods-MoviesAppTests */ = {
@@ -577,6 +557,14 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/ObjectMapper";
+			sourceTree = "<group>";
+		};
+		A3C07CD6F9652B0DF265BB4953FF0621 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61F32D509BA1DDDEE5403DEE044EA033 /* DownloadManager.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		B127EA35210822D210E9774863E07700 /* Support Files */ = {
@@ -708,6 +696,18 @@
 				B4EA34CC79C8B80787C2826B19C792C0 /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		FA9708E9DC4458BD317DD2B7824E990A /* DownloadManager */ = {
+			isa = PBXGroup;
+			children = (
+				3D51693F6764153FBBB9B9CE9B20744B /* DownloadManager.h */,
+				01EB32A84AC69DE0F235FE89069AA9E2 /* DownloadManager-Swift.h */,
+				A3C07CD6F9652B0DF265BB4953FF0621 /* Frameworks */,
+				05B9BBC670574FD9941B6919B1497237 /* Support Files */,
+			);
+			name = DownloadManager;
+			path = DownloadManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1311,7 +1311,7 @@
 		};
 		1DCD77D94B600404E21219D14932C914 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B20485C7A4764C6B3ABF2C923F8933D1 /* DownloadManager.xcconfig */;
+			baseConfigurationReference = 661E4CCA614DDE3898674967B72CB8FF /* DownloadManager.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1610,7 +1610,7 @@
 		};
 		7F1DCC6FD1E2847CED7C56237A6BB8D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B20485C7A4764C6B3ABF2C923F8933D1 /* DownloadManager.xcconfig */;
+			baseConfigurationReference = 661E4CCA614DDE3898674967B72CB8FF /* DownloadManager.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

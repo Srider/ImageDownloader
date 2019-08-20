@@ -40,22 +40,22 @@ class ImagesInteractor: PresenterToInteractorProtocol {
     }
     
     func fetchImagesForItems(_ arrImagesList: Array<Image>) {
+        objImageDownloader.cancelAllDownloads(self)
         self.arrImagesList = arrImagesList
         if self.arrImagesList!.count > 0 {
             for tempImageItem in self.arrImagesList! {
                 let objImageItem:Image = tempImageItem as Image
-                print("Adding - \(objImageItem.urls.raw)")
-                objImageDownloader.addDownloadRequest(objImageItem.id, fromURL: objImageItem.urls.raw, withDelegate:self)
+                if objImageItem.bImageFetchCompleted != true {
+                    print("Adding - \(objImageItem.urls.raw)")
+                    objImageDownloader.addDownloadRequest(objImageItem.id, fromURL: objImageItem.urls.raw, withDelegate:self)
+                }
             }
         }
     }
-    
-    
-    
 }
 
 extension ImagesInteractor: DownloadDelegate {
- 
+    
     func didFinishDownloadWithStatus(_ status:Bool, andData data:[String:Any]) {
         print("didFinishImageDownloadWithStatus - \(data)")
         
@@ -73,6 +73,29 @@ extension ImagesInteractor: DownloadDelegate {
                 objImageItem.bImageFetchCompleted = true
             }
         }
+        self.presenter?.refreshImageItems(imageArray:self.arrImagesList!)
+    }
+    
+    func didCancelDownloadWithStatus(_ status: Bool, andData data: [String : Any]) {
+        print("didCancelDownloadWithStatus - \(data)")
+        let dItemID = data["id"] as! String
+        
+        for tempImageItem in self.arrImagesList! {
+            let objImageItem:Image = tempImageItem as Image
+            if objImageItem.id == dItemID {
+                objImageItem.dImageData = nil
+                objImageItem.bImageFetchCompleted = true
+            }
+        }
+        self.presenter?.refreshImageItems(imageArray:self.arrImagesList!)
+    }
+    
+    func didCancelAllDownloads(_ status: Bool) {
+        //        for tempImageItem in self.arrImagesList! {
+        //            let objImageItem:Image = tempImageItem as Image
+        //            objImageItem.dImageData = nil
+        //            objImageItem.bImageFetchCompleted = false
+        //        }
         self.presenter?.refreshImageItems(imageArray:self.arrImagesList!)
     }
 }
