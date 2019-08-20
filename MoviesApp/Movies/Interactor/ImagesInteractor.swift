@@ -19,7 +19,6 @@ class ImagesInteractor: PresenterToInteractorProtocol {
     var objServerCommunication:ServerCommunication! = ServerCommunication.sharedInstance
     
     func fetchImagesBasedOnSelection(_ selection: Int!, andPage pageNumber: Int!) {
-        
         self.getImages("http://pastebin.com/raw/wgkJgazE")
     }
     
@@ -31,13 +30,13 @@ class ImagesInteractor: PresenterToInteractorProtocol {
                 let JSON = result as! Array<Any>
                 let arrImages:Array<Dictionary> = JSON as! Array<Dictionary<AnyHashable, Any>>
                 self.arrImagesList = Mapper<Image>().mapArray(JSONArray: arrImages as! [[String : Any]]);
-                
                 self.presenter?.imageFetchSuccess(imageArray:self.arrImagesList!)
             }else {
                 self.presenter?.imageFetchFailed()
             }
         })
     }
+    
     
     func fetchImagesForItems(_ arrImagesList: Array<Image>) {
         objImageDownloader.cancelAllDownloads(self)
@@ -91,11 +90,6 @@ extension ImagesInteractor: DownloadDelegate {
     }
     
     func didCancelAllDownloads(_ status: Bool) {
-        //        for tempImageItem in self.arrImagesList! {
-        //            let objImageItem:Image = tempImageItem as Image
-        //            objImageItem.dImageData = nil
-        //            objImageItem.bImageFetchCompleted = false
-        //        }
         self.presenter?.refreshImageItems(imageArray:self.arrImagesList!)
     }
 }
