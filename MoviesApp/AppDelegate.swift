@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+import DownloadManager
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Initialize Cache Parameters
+        
+        let objDownloadManager = DownloadManager.sharedDownloadManager
+        objDownloadManager.setCacheExpiry(60*60*24)
+        objDownloadManager.setCacheImageLimit(50)
+        objDownloadManager.setMaxConcurrency(5)
         
         /* Create ui-view-controller instance*/
         let images = ImagesRouter.createModule()
